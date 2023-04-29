@@ -7,12 +7,19 @@ const questions = [
     {
       type: 'input',
       name: 'text',
-      message: 'Provide a 3-letter text that represents your company. You must enter up to 3 characters only.',
+      message: 'Provide a 3-letter text that represents your company.',
+      validate: async (input) => {
+        if (input.length > 3 || input.length === 0 ) {
+           return 'The text must be 1 to 3 characters long.';
+        }
+  
+        return true;
+     }
     },
     {
       type: 'input',
       name: 'textColour',
-      message: 'Provide the colour or hex code of the colour that you want for your company text.',
+      message: 'What is the colour of the text? You can provide the colour or the hex value.',
     },
     {
       type: 'list',
@@ -23,7 +30,7 @@ const questions = [
     {
       type: 'input',
       name: 'shapeColour',
-      message: 'Provide the colour or hex code of the colour that you want for the shape of your logo.',
+      message: 'What is the colour of the shape? You can provide the colour or the hex value.',
     },
 ];
 
