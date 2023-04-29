@@ -29,9 +29,9 @@ const questions = [
 
 
 // Function to write README file
-const writeTofile = (readMetemplate) => {
-    fs.writeFile('README.md', readMetemplate, (err) =>
-        err ? console.error(err) : console.log('README.md generated!')
+const writeTofile = (logoTemplate) => {
+    fs.writeFile('logo.svg', logoTemplate, (err) =>
+        err ? console.error(err) : console.log('Generated logo.svg!')
     );
 };
 
@@ -42,66 +42,30 @@ function init() {
     inquirer
         .prompt(questions)
         .then((answers) => {
-            const readMetemplate = `
-# ${answers.title}
+            console.log(answers.shape)
 
-## Description
+            if (answers.shape === 'square') {
 
-${answers.description}
+            } else if (answers.shape === 'circle') {
 
-## Table of Contents
-- [Installation](#installation)
-- [Usage](#usage)
-- [Screenshot](#screenshot)
-- [Video recording](#video-recording)
-- [Credits](#credits)
-- [License](#license)
-- [Badges](#badges)
-- [Features](#features)
-- [Contributing](#contributing)
-- [Tests](#tests)
-- [Email address](#email-address)
-- [Github username](#github-username)
+            } else if (answers.shape === 'oblong') {
 
-## Installation
-${answers.installation}
+            } else if (answers.shape === 'triangle') {
+                
+            }
 
-## Usage
-${answers.usage}
+            const logoTemplate = `
+            <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
 
-## Screenshot
-![screenshot](${answers.screenshot})
-
-## Video recording
-You can visit this link to view the application in action: ${answers.video}
-
-## Credits
-${answers.credits}
-
-## License
-${answers.license}
-
-## Badges
-![badge image](${answers.badges})
-
-## Features
-${answers.features}
-
-## Contributing
-${answers.contribute}
-
-## Tests
-${answers.tests}
-
-## Email address
-${answers.email}
-
-## Github username
-${answers.username}
+            <circle cx="150" cy="100" r="80" fill="green" />
+          
+            <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text>
+          
+            </svg>
 
             `;
 
-            writeTofile(readMetemplate);
+            writeTofile(logoTemplate);
 
         });
 };
