@@ -7,30 +7,30 @@ const questions = [
     {
       type: 'input',
       name: 'text',
-      message: 'Please provide a 3-letter text that represents your company. You can enter up to 3 characters.',
+      message: 'Provide a 3-letter text that represents your company. You must enter up to 3 characters only.',
     },
     {
       type: 'input',
-      name: 'colour',
-      message: 'Please enter the name or the hexadecimal code of the colour that you want for your company text.',
+      name: 'textColour',
+      message: 'Provide the colour or hex code of the colour that you want for your company text.',
     },
     {
       type: 'list',
       name: 'shape',
       message: 'Choose a shape for your logo.',
-      choices: ['square', 'circle', 'oblong', 'triangle'],
+      choices: ['square', 'circle', 'ellipse'],
     },
     {
       type: 'input',
       name: 'shapeColour',
-      message: 'Please enter the name or the hexadecimal code of the colour that you want for the shape of your logo.',
+      message: 'Provide the colour or hex code of the colour that you want for the shape of your logo.',
     },
 ];
 
 
 // Function to write README file
-const writeTofile = (logoTemplate) => {
-    fs.writeFile('logo.svg', logoTemplate, (err) =>
+const writeTofile = (svgTemplate) => {
+    fs.writeFile('logo.svg', svgTemplate, (err) =>
         err ? console.error(err) : console.log('Generated logo.svg!')
     );
 };
@@ -42,30 +42,39 @@ function init() {
     inquirer
         .prompt(questions)
         .then((answers) => {
-            console.log(answers.shape)
+            let svgTemplate
 
             if (answers.shape === 'square') {
+                svgTemplate =
+`
+<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+<rect x="75" y="25" rx="20" ry="20" width="160" height="160" fill="${answers.shapeColour}" />
+<text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.textColour}">${answers.text}</text>
+</svg>
 
-            } else if (answers.shape === 'circle') {
+`;
+            } else if (answers.shape === 'ellipse') {
+                svgTemplate =
+`
+<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="150" cy="100" rx="100" ry="50" fill="${answers.shapeColour}" />
+<text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.textColour}">${answers.text}</text>
+</svg>
 
-            } else if (answers.shape === 'oblong') {
+`;
 
-            } else if (answers.shape === 'triangle') {
-                
-            }
+            } else {
+                svgTemplate =
+`
+<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+<circle cx="150" cy="100" r="80" fill="${answers.shapeColour}" />
+<text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.textColour}">${answers.text}</text>
+</svg>
 
-            const logoTemplate = `
-            <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+`;
+            };
 
-            <circle cx="150" cy="100" r="80" fill="green" />
-          
-            <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text>
-          
-            </svg>
-
-            `;
-
-            writeTofile(logoTemplate);
+            writeTofile(svgTemplate);
 
         });
 };
