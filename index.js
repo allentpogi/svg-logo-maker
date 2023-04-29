@@ -1,6 +1,7 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const shapes = require('./lib/square');
 
 // Array of questions for user input
 const questions = [
@@ -45,41 +46,68 @@ const writeTofile = (svgTemplate) => {
 
 // Function to initialize app
 
+// function init() {
+//     inquirer
+//         .prompt(questions)
+//         .then((answers) => {
+//             let svgTemplate
+
+//             if (answers.shape === 'square') {
+//                 svgTemplate =
+// `
+// <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+// <rect x="75" y="25" rx="20" ry="20" width="160" height="160" fill="${answers.shapeColour}" />
+// <text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.textColour}">${answers.text}</text>
+// </svg>
+
+// `;
+//             } else if (answers.shape === 'ellipse') {
+//                 svgTemplate =
+// `
+// <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+// <ellipse cx="150" cy="100" rx="100" ry="50" fill="${answers.shapeColour}" />
+// <text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.textColour}">${answers.text}</text>
+// </svg>
+
+// `;
+
+//             } else {
+//                 svgTemplate =
+// `
+// <svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+// <circle cx="150" cy="100" r="80" fill="${answers.shapeColour}" />
+// <text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.textColour}">${answers.text}</text>
+// </svg>
+
+// `;
+//             };
+
+//             writeTofile(svgTemplate);
+
+//         });
+// };
+
+
 function init() {
+
     inquirer
         .prompt(questions)
         .then((answers) => {
-            let svgTemplate
+            
+            // if (answers.shape === 'square') {
+                const newSquareLogo = new shapes (
+                    answers.text,
+                    answers.textColour,
+                    answers.shapeColour
+                );
+            // }
 
-            if (answers.shape === 'square') {
-                svgTemplate =
-`
-<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-<rect x="75" y="25" rx="20" ry="20" width="160" height="160" fill="${answers.shapeColour}" />
-<text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.textColour}">${answers.text}</text>
-</svg>
+            console.log(newSquareLogo);
+            
+            const svgTemplate = newSquareLogo.generateSquarelogo()
 
-`;
-            } else if (answers.shape === 'ellipse') {
-                svgTemplate =
-`
-<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="150" cy="100" rx="100" ry="50" fill="${answers.shapeColour}" />
-<text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.textColour}">${answers.text}</text>
-</svg>
-
-`;
-
-            } else {
-                svgTemplate =
-`
-<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-<circle cx="150" cy="100" r="80" fill="${answers.shapeColour}" />
-<text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.textColour}">${answers.text}</text>
-</svg>
-
-`;
-            };
+            
+            console.log(svgTemplate);
 
             writeTofile(svgTemplate);
 
