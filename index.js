@@ -23,7 +23,7 @@ const questions = [
     {
       type: 'input',
       name: 'textColour',
-      message: 'What is the colour of the text? You can provide the colour or the hex value.',
+      message: 'What colour do you want for the text?',
     },
     {
       type: 'list',
@@ -34,7 +34,7 @@ const questions = [
     {
       type: 'input',
       name: 'shapeColour',
-      message: 'What is the colour of the shape? You can provide the colour or the hex value.',
+      message: 'What background colour do you want for the shape?',
     },
 ];
 
