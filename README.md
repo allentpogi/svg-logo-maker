@@ -41,7 +41,8 @@ Below are example logos created by the program.
 
 
 ## Video recording
-You can visit this link to view the application in action: https://drive.google.com/file/d/18WCgs6w14ByYFuz-DN4_RQJGec-tHw_X/view
+You can visit this link to view the application in action: https://drive.google.com/file/d/11_vW8ZfbjoZ2n_-AX7OsWidP3Y0OYDk1/view
+
 
 
 ## Credits
